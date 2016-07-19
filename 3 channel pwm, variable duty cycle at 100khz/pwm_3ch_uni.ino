@@ -1,4 +1,4 @@
-float max_duty=0.8; //80%
+float max_duty=0.7; //80%
 float min_duty=0.2; //20%
 
 #include <LiquidCrystal.h>
@@ -30,7 +30,6 @@ void timer0_setup(void)
 {
 TCCR0A=0b01100011; //b0 b1 a0 a1 r r w1 w0
 TCCR0B=9;
-TCCR0B=00001001;
 pinMode(5,OUTPUT);
 pinMode(A3,INPUT);  
 OCR0A=159;
@@ -39,9 +38,9 @@ OCR0A=159;
  {duty=analogRead(A4);
 duty=duty/1023;
 if(duty<min_duty)
-duty=0.2;
+duty=min_duty;
 else if(duty>max_duty)
-duty=0.8;
+duty=max_duty;
 OCR0B=duty*159;
 //Serial.println(analogRead(A0));
 int d=duty*100;
@@ -64,9 +63,9 @@ OCR2A=159;
  {duty2=analogRead(A3);
 duty2=duty2/1023;
 if(duty2<min_duty)
-duty2=0.2;
+duty2=min_duty;
 else if(duty2>max_duty)
-duty2=0.8;
+duty2=max_duty;
 
 OCR2B=duty2*159;
 //Serial.println(analogRead(A2));
@@ -92,9 +91,9 @@ OCR1A=159;
  {duty1=analogRead(A5);
 duty1=duty1/1023;
 if(duty1<min_duty)
-duty1=0.2;
+duty1=min_duty;
 else if(duty1>max_duty)
-duty1=0.8;
+duty1=max_duty;
 
 OCR1B=duty1*159;
 //Serial.println(analogRead(A1));
